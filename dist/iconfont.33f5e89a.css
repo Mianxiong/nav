@@ -1,0 +1,19 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3470608 */
+  src: url("iconfont.0dbdbacf.woff2?t=1655390809297") format("woff2"),
+    url("iconfont.507c91c2.woff?t=1655390809297") format("woff"),
+    url("iconfont.ed301ef1.ttf?t=1655390809297") format("truetype");
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-add:before {
+  content: "\e689";
+  font-size: 56px;
+}
