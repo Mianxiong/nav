@@ -104,6 +104,28 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   // Override the current require with this new one
   return newRequire;
 })({"main.js":[function(require,module,exports) {
+var $siteList = $('.siteList');
+var $lastLi = $siteList.find('li.last');
+var x = localStorage.getItem('x');
+//把字符串变成对象
+var xObject = JSON.parse(x);
+var hashMap = xObject || [{
+    logo: 'A',
+    logoType: 'text',
+    url: 'https://www.acfun.cn'
+}, {
+    logo: './images/bilibili.png',
+    logoType: 'image',
+    url: 'https://www.bilibili.com'
+}];
+
+function render() {
+    $siteList.find('li:not(.last)').remove();
+    hashMap.forEach(function (node) {
+        var $li = $('<li>\n        <a href="' + node.url + '">\n            <div class="site">\n                <div class="logo">' + node.logo[0] + '</div>\n                <div class="link">' + node.url + '</div>\n            </div>\n        </a>\n    </li>').insertBefore($lastLi);
+    });
+}
+render();
 $('.addButton').on('click', function () {
     var url = window.prompt('请问你要添加的网址是啥？');
     if (url.indexOf('http') !== 0) {
@@ -111,13 +133,24 @@ $('.addButton').on('click', function () {
         url = 'https://' + url;
     }
     console.log(url);
-    var $siteList = $('.siteList');
-    console.log('siteList', $siteList);
-    var $lastLi = $siteList.find('li.last');
-    var $li = $('<li>\n    <a href="' + url + '">\n        <div class="site">\n            <div class="logo">\n                ' + url[0] + '\n            </div>\n            <div class="link">' + url + '</div>\n        </div>\n    </a>\n</li>').insertBefore($lastLi);
+    hashMap.push({
+        logo: url[0],
+        logoType: 'text',
+        url: url
+    });
+    render();
     //以下会插入到+号后面
     // .appendTo($siteList)
 });
+window.onbeforeunload = function () {
+    console.log('页面要关闭了');
+    var string = JSON.stringify(hashMap); //把对象变成string
+    // console.log(typeof hashMap)
+    // console.log(hashMap)
+    // console.log(typeof string)
+    // console.log(string)
+    localStorage.setItem('x', string);
+};
 },{}],"C:\\Users\\hmx\\AppData\\Local\\Yarn\\Data\\global\\node_modules\\parcel\\src\\builtins\\hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -147,7 +180,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '1345' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '17051' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
