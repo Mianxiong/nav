@@ -13,6 +13,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-close:before {
+  content: "\e6dc";
+}
+
 .icon-add:before {
   content: "\e689";
   font-size: 56px;

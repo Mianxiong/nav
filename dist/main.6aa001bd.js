@@ -111,20 +111,29 @@ var x = localStorage.getItem('x');
 var xObject = JSON.parse(x);
 var hashMap = xObject || [{
     logo: 'A',
-    logoType: 'text',
     url: 'https://www.acfun.cn'
 }, {
-    logo: './images/bilibili.png',
-    logoType: 'image',
+    logo: 'B',
     url: 'https://www.bilibili.com'
 }];
-
-function render() {
+var simplifyUrl = function simplifyUrl(url) {
+    return url.replace('https://', '').replace('http://', '').replace('www.', '').replace(/\/.*/, ''); //删除 / 开头的内容
+};
+var render = function render() {
     $siteList.find('li:not(.last)').remove();
-    hashMap.forEach(function (node) {
-        var $li = $('<li>\n        <a href="' + node.url + '">\n            <div class="site">\n                <div class="logo">' + node.logo[0] + '</div>\n                <div class="link">' + node.url + '</div>\n            </div>\n        </a>\n    </li>').insertBefore($lastLi);
+    hashMap.forEach(function (node, index) {
+        var $li = $('<li>     \n            <div class="site">\n                <div class="logo">' + node.logo[0] + '</div>\n                <div class="link">' + simplifyUrl(node.url) + '</div>\n                <div class="close"><i class="iconfont icon-close"></i></div>\n            </div>        \n    </li>').insertBefore($lastLi);
+        console.log('li', $li);
+        $li.on('click', function () {
+            window.open(node.url);
+        });
+        $li.on('click', '.close', function (e) {
+            e.stopPropagation(); //阻止冒泡
+            hashMap.splice(index, 1);
+            render();
+        });
     });
-}
+};
 render();
 $('.addButton').on('click', function () {
     var url = window.prompt('请问你要添加的网址是啥？');
@@ -134,7 +143,7 @@ $('.addButton').on('click', function () {
     }
     console.log(url);
     hashMap.push({
-        logo: url[0],
+        logo: simplifyUrl(url)[0].toUpperCase(),
         logoType: 'text',
         url: url
     });
@@ -180,7 +189,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '17051' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '1680' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

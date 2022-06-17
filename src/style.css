@@ -74,6 +74,7 @@ body {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 20px 0;
+  position: relative;
   /* height: 128px; */
   /* margin-bottom: 10px; */
 }
@@ -85,10 +86,16 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 64px;
+  text-transform: uppercase;
 }
 .siteList .site > .link {
   font-size: 14px;
   margin-top: 4px;
+}
+.siteList .site > .close{
+  position: absolute;
+  right: 10px;
+  top: 5px;
 }
 .siteList .addButton {
   border: 1px solid #ddd;
