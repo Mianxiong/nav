@@ -78,19 +78,25 @@ body {
   margin: 20px;
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: space-between; 平均布局不适用*/
+  justify-content: space-between;
 }
 @media (min-width:500px) {
   .siteList {
     margin-left: 0;
     /* 负margin */
     margin-right: -25px;
+    justify-content: flex-start;
   }
 }
 .siteList > li {
   /* border:1px solid red; */
   margin-bottom: 10px;
-  margin-right: 25px;
+}
+/* 最小宽度为500以上的页面 */
+@media (min-width:500px) {
+  .siteList > li {
+    margin-right: 25px;
+  }
 }
 .siteList .site {
   width: 160px;
@@ -103,6 +109,7 @@ body {
   border-radius: 4px;
   padding: 20px 0;
   position: relative;
+  cursor: pointer;
   /* height: 128px; */
   /* margin-bottom: 10px; */
 }
@@ -124,6 +131,11 @@ body {
   position: absolute;
   right: 10px;
   top: 5px;
+  display: none;
+  cursor: default;
+}
+.siteList .site:hover > .close {
+  display: block;
 }
 .siteList .addButton {
   border: 1px solid #ddd;

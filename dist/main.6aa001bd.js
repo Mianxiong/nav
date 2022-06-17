@@ -160,6 +160,17 @@ window.onbeforeunload = function () {
     // console.log(string)
     localStorage.setItem('x', string);
 };
+
+$(document).on('keypress', function (e) {
+    // const key = e.key
+    var key = e.key;
+
+    for (var i = 0; i < hashMap.length; i++) {
+        if (hashMap[i].logo.toLowerCase() === key) {
+            window.open(hashMap[i].url);
+        }
+    }
+});
 },{}],"C:\\Users\\hmx\\AppData\\Local\\Yarn\\Data\\global\\node_modules\\parcel\\src\\builtins\\hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
